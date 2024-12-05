@@ -160,6 +160,44 @@ P_n = regulation.P_n(RDataset.from_wb_df_to_dataset(df), V_c=1.0, gt_10_years=Tr
 print(P_n - P <= eps)
 ```
 
+### 3. Mapping Functions for Water Levels and Capacities
+These functions allow efficient mapping between water levels and reservoir capacities, with optional support for nearest neighbor interpolation.
+
+`get_capacity`
+Maps a single water level to its corresponding capacity using a provided mapping dictionary. Supports optional nearest neighbor interpolation for unmatched values.
+```python
+from hydreservoir.utils import get_capacity
+water_level_capacity_map = {0.0: 0.0, 1.0: 100.0, 2.0: 200.0}
+capacity = get_capacity(1.5, water_level_capacity_map, nearest_mapping=True)
+print(capacity)  # Output: 100.0
+```
+`map_capacity`
+Maps an array of water levels to their corresponding capacities using a provided mapping dictionary. Supports optional nearest neighbor interpolation for unmatched values.
+```python
+from hydreservoir.utils import map_capacity
+water_level_capacity_map = {0.0: 0.0, 1.0: 100.0, 2.0: 200.0}
+water_levels = [0.5, 1.5, 2.0]
+capacities = map_capacity(water_levels, water_level_capacity_map, nearest_mapping=True)
+print(capacities)  # Output: [0.0, 100.0, 200.0]
+```
+`get_water_level`
+Maps a single capacity to its corresponding water level using a provided mapping dictionary. Supports optional nearest neighbor interpolation for unmatched values.
+```python
+from hydreservoir.utils import get_water_level
+capacity_water_level_map = {0.0: 0.0, 100.0: 1.0, 200.0: 2.0}
+water_level = get_water_level(150.0, capacity_water_level_map, nearest_mapping=True)
+print(water_level)  # Output: 1.0
+```
+`map_water_level`
+Maps an array of capacities to their corresponding water levels using a provided mapping dictionary. Supports optional nearest neighbor interpolation for unmatched values.
+```python
+from hydreservoir.utils import map_water_level
+capacity_water_level_map = {0.0: 0.0, 100.0: 1.0, 200.0: 2.0}
+capacities = [50.0, 150.0, 200.0]
+water_levels = map_water_level(capacities, capacity_water_level_map, nearest_mapping=True)
+print(water_levels)  # Output: [0.0, 1.0, 2.0]
+```
+
 ## License
 
 This library is released under the MIT License.
