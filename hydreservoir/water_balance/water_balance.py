@@ -89,13 +89,13 @@ def _hydraulic_works_flow(
         openings = df[col].to_numpy()
 
         outflows = np.vectorize(
-            lambda w, o: flow(
+            lambda w, o: float(flow(
                 water_level=w,
                 elevation=cfg.elevation,
                 height_or_diameter=cfg.height_or_diameter,
                 opening_height=o,
                 flow_type=flow_type,
-            )
+            ))
         )(water_levels, openings)
 
         df[outflow_column_name] = outflows
