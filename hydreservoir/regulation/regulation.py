@@ -121,7 +121,7 @@ def _P_n(df: pd.DataFrame, V_c: float) -> float:
     def check_water_sufficiency(year_group):
         # Calculate cumulative water capacity changes
         capacity_ht = V_c + np.cumsum(
-            (year_group[OUTFLOW] - year_group[INFLOW]) * year_group[INTERVAL] / 10**6
+            (year_group[OUTFLOW] - year_group[INFLOW]) * year_group[INTERVAL] / 10 ** 6
         )
 
         # Check if minimum capacity remains above V_c
@@ -137,9 +137,9 @@ def _P_n(df: pd.DataFrame, V_c: float) -> float:
 
 
 def P_n(
-    dataset: Dataset,
-    V_c: float,
-    gt_10_years: bool = True,
+        dataset: Dataset,
+        V_c: float,
+        gt_10_years: bool = True,
 ) -> float:
     """
     Assess the comprehensiveness of a water reservoir regulation strategy.
@@ -174,15 +174,6 @@ def P_n(
     ValueError
         - If data contains null values that cannot be processed
         - When gt_10_years is True and dataset spans less than 10 years
-
-    Examples
-    --------
-    >>> hydro_dataset = load_hydrological_dataset()
-    >>> performance = is_comprehensive_regulation(
-    ...     dataset=hydro_dataset,
-    ...     V_c=100.0
-    ... )
-    >>> print(f"Regulation Strategy Performance: {performance}")
 
     Notes
     -----
