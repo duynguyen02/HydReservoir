@@ -25,6 +25,7 @@ UNKNOWN_DISCHARGE_PREFIX = f"{UNKNOWN_DISCHARGE}."
 
 CAPACITY = "Capacity"
 INTERVAL = "Interval"
+DELTA = "Delta"
 
 OUTFLOW = "Outflow"
 INFLOW = "Inflow"
