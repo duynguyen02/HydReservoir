@@ -175,7 +175,7 @@ from hydreservoir.regulation import regulation
 from hydreservoir.regulation.dataset import Dataset as RDataset
 
 # ... calculate init components for water balance
-df = wb.calculate().to_csv('result.csv', index=False)
+df = wb.calculate()
 
 # Regulation analysis
 P = 90.0
